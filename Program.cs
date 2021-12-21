@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SuncoastHumanResources
 {
@@ -64,7 +65,7 @@ namespace SuncoastHumanResources
             {
                 // Insert a blank line then prompt them and get their answer (force uppercase)
                 Console.WriteLine();
-                Console.Write("What do you want to do?\n (A)dd an employee\n(F)ind an employee\n(S)how all the employees\n (Q)uit\n: ");
+                Console.Write("What do you want to do?\n (A)dd an employee\n(D)elete and employee\n(F)ind an employee\n(S)how all the employees\n (Q)uit\n: ");
                 var choice = Console.ReadLine().ToUpper();
                 if (choice == "Q")
                 {
@@ -72,21 +73,48 @@ namespace SuncoastHumanResources
                     keepGoing = false;
                 }
                 else
-                if (choice == "F")
+                if (choice == "D")
                 {
-                    // -Create a var named ** foundEmployee ** 
-                    Employee foundEmployee = null;
-                    // - Prompt for the name 
+                    // DELETE (out of CRUD)
+
+                    // get the employee name we are searching for.
                     var nameToSearchFor = PromptForString("What name are you looking for?");
-                    // - Loop through the list to look for a match
-                    foreach (var employee in employees)
+                    // Search database to see if they exist
+                    Employee foundEmployee = employees.FirstOrDefault(employee => employee.Name == nameToSearchFor);
+
+                    // if we found employee 
+                    if (foundEmployee == null)
                     {
-                        // - If we find one, update 'foundEmployee' 
-                        if (employee.Name == nameToSearchFor)
+                        // show that person doesn't exist
+                        Console.WriteLine("No such employee");
+                    }
+                    else
+                    {
+                        //      -we did find employee
+                        //      -show the details
+                        Console.WriteLine($"{foundEmployee.Name} is in department {foundEmployee.Department} and makes ${foundEmployee.Salary}");
+
+                        // -ask to confirm "Are you sure?"
+                        var confirm = PromptForString("Are you sure? [Y/N] ").ToUpper();
+
+                        if (confirm == "Y")
                         {
-                            foundEmployee = employee;
+                            // -Delete them
+                            employees.Remove(foundEmployee);
                         }
                     }
+                }
+                else
+                if (choice == "F")
+                {
+
+                    // - Prompt for the name 
+                    var nameToSearchFor = PromptForString("What name are you looking for?");
+
+                    // -Create a var named ** foundEmployee ** Search for employee
+                    Employee foundEmployee = employees.FirstOrDefault(employee => employee.Name == nameToSearchFor);
+
+
                     // - After the loop, 'foundEmployee' is either 'null' (not found) or refers to the matching item 
                     if (foundEmployee == null)
                     // - Show a message if 'null', 
@@ -109,14 +137,12 @@ namespace SuncoastHumanResources
                     }
                 }
                 else
+                if (choice == "A")
                 {
                     // CREATE (out of CRUD)
 
-
-
-
-                    var employee = new Employee();
                     // Make a new employee object
+                    var employee = new Employee();
 
                     // Prompt for values and save them in the employee's properties
                     employee.Name = PromptForString("What is your name? ");
@@ -126,7 +152,10 @@ namespace SuncoastHumanResources
                     // Add it to the list
                     employees.Add(employee);
                 }
-
+                else
+                {
+                    Console.WriteLine("NOPE!");
+                }
                 // end of the `while` statement
             }
         }
