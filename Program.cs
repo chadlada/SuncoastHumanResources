@@ -41,6 +41,7 @@ namespace SuncoastHumanResources
         static void Main(string[] args)
         {
             // var employees = new List<Employee>();
+            // make a new database
             var database = new EmployeeDatabase();
 
 
