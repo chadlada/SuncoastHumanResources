@@ -58,6 +58,7 @@ namespace SuncoastHumanResources
 
             DisplayGreeting();
 
+
             // Should we keep showing the menu?
             var keepGoing = true;
             // While the user hasn't said QUIT yet
