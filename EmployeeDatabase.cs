@@ -8,6 +8,16 @@ namespace SuncoastHumanResources
         // var employees = new List<Employee>();
         private List<Employee> Employees { get; set; } = new List<Employee>();
 
+        // method to load employees
+        public void LoadEmployees()
+        {
+
+        }
+
+        public void SaveEmployees()
+        {
+
+        }
 
         // CREATE Add Employee
         public void AddEmployee(Employee newEmployee)
@@ -20,6 +30,7 @@ namespace SuncoastHumanResources
         {
             return Employees;
         }
+
         // READ Find One Employee
         public Employee FindOneEmployee(string nameToFind)
         {
@@ -27,7 +38,7 @@ namespace SuncoastHumanResources
 
             return foundEmployee;
         }
-        // Get all Employees
+
 
         // DELETE Delete Employee
         public void DeleteEmployee(Employee employeeToDelete)
