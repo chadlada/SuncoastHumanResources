@@ -44,6 +44,7 @@ namespace SuncoastHumanResources
             // make a new database
             var database = new EmployeeDatabase();
 
+            database.LoadEmployees();
 
             DisplayGreeting();
 
@@ -55,7 +56,7 @@ namespace SuncoastHumanResources
             {
                 // Insert a blank line then prompt them and get their answer (force uppercase)
                 Console.WriteLine();
-                Console.Write("What do you want to do?\n (A)dd an employee\n(D)elete an employee\n(F)ind an employee\n(S)how all the employees\n(U)pdate and employee\n (Q)uit\n: ");
+                Console.Write("What do you want to do?\n (A)dd an employee\n(D)elete an employee\n(F)ind an employee\n(S)how all the employees\n(U)pdate an employee\n (Q)uit\n: ");
                 var choice = Console.ReadLine().ToUpper();
 
                 switch (choice)
@@ -82,9 +83,9 @@ namespace SuncoastHumanResources
                         Console.WriteLine("NOPE!");
                         break;
                 }
-
-
             }
+            database.SaveEmployees();
+
         }
 
         private static void DeleteEmployee(EmployeeDatabase database)
