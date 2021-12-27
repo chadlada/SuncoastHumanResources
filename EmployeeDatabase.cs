@@ -14,14 +14,22 @@ namespace SuncoastHumanResources
         // method to load employees
         public void LoadEmployees()
         {
+            if (File.Exists("employees.csv"))
+            {
+                var fileReader = new StreamReader("employees.csv");
+                var csvReader = new CsvReader(fileReader, CultureInfo.InvariantCulture);
 
+                // Replace our BLANK list of employees with the ones that are in the CSV file
+                Employees = csvReader.GetRecords<Employee>().ToList();
+                fileReader.Close();
+            }
         }
 
         public void SaveEmployees()
         {
             var fileWriter = new StreamWriter("employees.csv");
             var csvWriter = new CsvWriter(fileWriter, CultureInfo.InvariantCulture);
-            csvWriter.WriteRecord(Employees);
+            csvWriter.WriteRecords(Employees);
             fileWriter.Close();
         }
 
