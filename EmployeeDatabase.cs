@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using CsvHelper;
 
 namespace SuncoastHumanResources
 {
@@ -16,7 +19,10 @@ namespace SuncoastHumanResources
 
         public void SaveEmployees()
         {
-
+            var fileWriter = new StreamWriter("employees.csv");
+            var csvWriter = new CsvWriter(fileWriter, CultureInfo.InvariantCulture);
+            csvWriter.WriteRecord(Employees);
+            fileWriter.Close();
         }
 
         // CREATE Add Employee
